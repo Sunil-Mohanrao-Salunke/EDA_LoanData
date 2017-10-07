@@ -1,0 +1,472 @@
+---
+title: "Project_LoanDataAnalysis by Sunil Salunke"
+output: 
+  html_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Install necessary Libraries
+```{r Install Libraries, message=FALSE, warning=FALSE}
+require(tidyr)
+require(dplyr)
+require(ggplot2)
+require(gridExtra)
+```
+# Load and read input data
+```{r, message=FALSE, warning=FALSE}
+ProsperLoanData <- read.csv("prosperLoanData.csv", stringsAsFactors = FALSE)
+head(ProsperLoanData)
+```
+
+# Remove NA values, create a new data set
+```{r remove NA values, message=FALSE, warning=FALSE}
+# Estimating total number of observations in column TotalProsperLoans
+TotalObservations_TotalProsperLoans <- length(ProsperLoanData$TotalProsperLoans)
+
+TotalObservations_TotalProsperLoans
+
+summary(ProsperLoanData$TotalProsperLoans)
+
+# Estimating total NA values observations in column TotalProsperLoans
+totalNa_TotalProsperLoans = count(ProsperLoanData, is.na(TotalProsperLoans))
+
+totalNa_TotalProsperLoans
+
+# Calculating ratio of number of NA values to total number of observations in column TotalProsperLoans
+ratio_TotalProsperLoans = (totalNa_TotalProsperLoans[2,2])/TotalObservations_TotalProsperLoans
+
+ratio_TotalProsperLoans
+```
+
+It shows 80% values in column "TotalProsperLoans" are NA values which is a significant portion. Let's remove this column from consideration into exploratory data analysis
+
+```{r, message=FALSE, warning=FALSE}
+
+# Estimating total number of observations in column TotalProsperPaymentsBilled
+TotalObservations_TotalProsperPaymentsBilled <- length(ProsperLoanData$TotalProsperPaymentsBilled)
+
+TotalObservations_TotalProsperPaymentsBilled
+
+summary(ProsperLoanData$TotalProsperPaymentsBilled)
+
+# Estimating total NA values observations in column TotalProsperPaymentsBilled
+totalNa_TotalProsperPaymentsBilled <- count(ProsperLoanData, is.na(TotalProsperPaymentsBilled))
+
+totalNa_TotalProsperPaymentsBilled
+
+# Calculating ratio of number of NA values to total number of observations in column TotalProsperPaymentsBilled
+ratio_TotalProsperPaymentsBilled = (totalNa_TotalProsperPaymentsBilled[2,2])/TotalObservations_TotalProsperPaymentsBilled
+
+ratio_TotalProsperPaymentsBilled
+```
+
+It shows 80% values in column "TotalProsperPaymentsBilled" are NA values which is a significant portion. Let's remove this column from consideration into exploratory data analysis
+
+```{r, message=FALSE, warning=FALSE}
+# Estimating total number of observations in column OnTimeProsperPayments
+TotalObservations_OnTimeProsperPayments <- length(ProsperLoanData$OnTimeProsperPayments)
+
+TotalObservations_OnTimeProsperPayments
+
+summary(ProsperLoanData$OnTimeProsperPayments)
+
+# Estimating total NA values observations in column OnTimeProsperPayments
+totalNa_OnTimeProsperPayments <- count(ProsperLoanData, is.na(OnTimeProsperPayments))
+
+totalNa_OnTimeProsperPayments
+
+# Calculating ratio of number of NA values to total number of observations in column OnTimeProsperPayments
+ratio_OnTimeProsperPayments = (totalNa_OnTimeProsperPayments[2,2])/TotalObservations_OnTimeProsperPayments
+
+ratio_OnTimeProsperPayments
+```
+
+It shows 80% values in column "OnTimeProsperPayments" are NA values which is a significant portion. Let's remove this column from consideration into exploratory data analysis
+
+```{r, message=FALSE, warning=FALSE}
+# Estimating total number of observations in column ProsperPaymentsLessThanOneMonthLate
+TotalObservations_ProsperPaymentsLessThanOneMonthLate <- length(ProsperLoanData$ProsperPaymentsLessThanOneMonthLate)
+
+TotalObservations_ProsperPaymentsLessThanOneMonthLate
+
+summary(ProsperLoanData$OnTimeProsperPayments)
+
+# Estimating total NA values observations in column ProsperPaymentsLessThanOneMonthLate
+totalNa_ProsperPaymentsLessThanOneMonthLate <- count(ProsperLoanData, is.na(ProsperPaymentsLessThanOneMonthLate))
+
+totalNa_ProsperPaymentsLessThanOneMonthLate
+
+# Calculating ratio of number of NA values to total number of observations in column ProsperPaymentsLessThanOneMonthLate
+ratio_ProsperPaymentsLessThanOneMonthLate = (totalNa_ProsperPaymentsLessThanOneMonthLate[2,2])/TotalObservations_ProsperPaymentsLessThanOneMonthLate
+
+ratio_ProsperPaymentsLessThanOneMonthLate
+```
+
+It shows 80% values in column "ProsperPaymentsLessThanOneMonthLate" are NA values which is a significant portion. Let's remove this column from consideration into exploratory data analysis
+
+```{r, message=FALSE, warning=FALSE}
+# Estimating total number of observations in column ProsperPrincipalBorrowed
+TotalObservations_ProsperPrincipalBorrowed <- length(ProsperLoanData$ProsperPrincipalBorrowed)
+
+TotalObservations_ProsperPrincipalBorrowed
+
+summary(ProsperLoanData$ProsperPrincipalBorrowed)
+
+# Estimating total NA values observations in column ProsperPrincipalBorrowed
+totalNa_ProsperPrincipalBorrowed <- count(ProsperLoanData, is.na(ProsperPrincipalBorrowed))
+
+totalNa_ProsperPrincipalBorrowed
+
+# Calculating ratio of number of NA values to total number of observations in column ProsperPrincipalBorrowed
+ratio_ProsperPrincipalBorrowed = (totalNa_ProsperPrincipalBorrowed[2,2])/TotalObservations_ProsperPrincipalBorrowed
+
+ratio_ProsperPrincipalBorrowed
+```
+
+It shows 80% values in column "ProsperPrincipalBorrowed" are NA values which is a significant portion. Let's remove this column from consideration into exploratory data analysis
+
+```{r, message=FALSE, warning=FALSE}
+# Estimating total number of observations in column ProsperPrincipalOutstanding
+TotalObservations_ProsperPrincipalOutstanding <- length(ProsperLoanData$ProsperPrincipalOutstanding)
+
+TotalObservations_ProsperPrincipalOutstanding
+
+summary(ProsperLoanData$ProsperPrincipalOutstanding)
+
+# Estimating total NA values observations in column ProsperPrincipalOutstanding
+totalNa_ProsperPrincipalOutstanding <- count(ProsperLoanData, is.na(ProsperPrincipalOutstanding))
+
+totalNa_ProsperPrincipalOutstanding
+
+# Calculating ratio of number of NA values to total number of observations in column ProsperPrincipalOutstanding
+ratio_ProsperPrincipalOutstanding = (totalNa_ProsperPrincipalOutstanding[2,2])/TotalObservations_ProsperPrincipalOutstanding
+
+ratio_ProsperPrincipalOutstanding
+```
+
+It shows 80% values in column "ProsperPrincipalOutstanding" are NA values which is a significant portion. Let's remove this column from consideration into exploratory data analysis
+
+```{r, message=FALSE, warning=FALSE}
+# Estimating total number of observations in column ScorexChangeAtTimeOfListing
+TotalObservations_ScorexChangeAtTimeOfListing <- length(ProsperLoanData$ScorexChangeAtTimeOfListing)
+
+TotalObservations_ScorexChangeAtTimeOfListing
+
+summary(ProsperLoanData$ScorexChangeAtTimeOfListing)
+
+# Estimating total NA values observations in column ScorexChangeAtTimeOfListing
+totalNa_ScorexChangeAtTimeOfListing <- count(ProsperLoanData, is.na(ScorexChangeAtTimeOfListing))
+
+totalNa_ScorexChangeAtTimeOfListing
+
+# Calculating ratio of number of NA values to total number of observations in column ScorexChangeAtTimeOfListing
+ratio_ScorexChangeAtTimeOfListing = (totalNa_ScorexChangeAtTimeOfListing[2,2])/TotalObservations_ScorexChangeAtTimeOfListing
+
+ratio_ScorexChangeAtTimeOfListing
+```
+
+It shows 83% values in column "ScorexChangeAtTimeOfListing" are NA values which is a significant portion. Let's remove this column from consideration into exploratory data analysis
+
+```{r, message=FALSE, warning=FALSE}
+# Estimating total number of observations in column LoanCurrentDaysDelinquent
+TotalObservations_LoanCurrentDaysDelinquent <- length(ProsperLoanData$LoanCurrentDaysDelinquent)
+
+TotalObservations_LoanCurrentDaysDelinquent
+
+summary(ProsperLoanData$LoanCurrentDaysDelinquent)
+
+# Estimating total zero values observations in column LoanCurrentDaysDelinquent
+totalZeros_LoanCurrentDaysDelinquent <- count(ProsperLoanData, LoanCurrentDaysDelinquent == 0)
+
+totalZeros_LoanCurrentDaysDelinquent
+
+# Calculating ratio of number of zero values to total number of observations in column LoanCurrentDaysDelinquent
+ratio_LoanCurrentDaysDelinquent = (totalZeros_LoanCurrentDaysDelinquent[2,2])/TotalObservations_LoanCurrentDaysDelinquent
+
+ratio_LoanCurrentDaysDelinquent
+```
+
+It shows 83% values in column "LoanCurrentDaysDelinquent" are zero values which is a significant portion. Let's remove this column from consideration into exploratory data analysis
+
+```{r, message=FALSE, warning=FALSE}
+# Estimating total number of observations in column LoanFirstDefaultedCycleNumber
+TotalObservations_LoanFirstDefaultedCycleNumber <- length(ProsperLoanData$LoanFirstDefaultedCycleNumber)
+
+TotalObservations_LoanFirstDefaultedCycleNumber
+
+summary(ProsperLoanData$LoanFirstDefaultedCycleNumber)
+
+# Estimating total NA values observations in column LoanFirstDefaultedCycleNumber
+totalNa_LoanFirstDefaultedCycleNumber <- count(ProsperLoanData, is.na(LoanFirstDefaultedCycleNumber))
+
+totalNa_LoanFirstDefaultedCycleNumber
+
+# Calculating ratio of number of NA values to total number of observations in column LoanFirstDefaultedCycleNumber
+ratio_LoanFirstDefaultedCycleNumber = (totalNa_LoanFirstDefaultedCycleNumber[2,2])/TotalObservations_LoanFirstDefaultedCycleNumber
+
+ratio_LoanFirstDefaultedCycleNumber
+```
+
+It shows 85% values in column "LoanFirstDefaultedCycleNumber" are NA values which is a significant portion. Let's remove this column from consideration into exploratory data analysis
+
+```{r, message=FALSE, warning=FALSE}
+# Estimating total number of observations in column LP_GrossPrincipalLoss
+TotalObservations_LP_GrossPrincipalLoss <- length(ProsperLoanData$LP_GrossPrincipalLoss)
+
+TotalObservations_LP_GrossPrincipalLoss
+
+summary(ProsperLoanData$LP_GrossPrincipalLoss)
+
+# Estimating total NA values observations in column LP_GrossPrincipalLoss
+totalZeros_LP_GrossPrincipalLoss <- count(ProsperLoanData, LP_GrossPrincipalLoss==0)
+
+totalZeros_LP_GrossPrincipalLoss
+
+# Calculating ratio of number of NA values to total number of observations in column LP_GrossPrincipalLoss
+ratio_LP_GrossPrincipalLoss = (totalZeros_LP_GrossPrincipalLoss[2,2])/TotalObservations_LP_GrossPrincipalLoss
+
+ratio_LP_GrossPrincipalLoss
+```
+
+It shows 85% values in column "LP_GrossPrincipalLoss" are Zero values which is a significant portion. Let's remove this column from consideration into exploratory data analysis
+
+# Creating new data set with elimiating columns with  NA values
+```{r, message= FALSE, warning=FALSE}
+LoanWithoutNa <- select(ProsperLoanData, -TotalProsperLoans, -TotalProsperPaymentsBilled, -OnTimeProsperPayments, -ProsperPaymentsLessThanOneMonthLate, -ProsperPrincipalBorrowed, -ProsperPrincipalOutstanding, -ScorexChangeAtTimeOfListing, -LoanCurrentDaysDelinquent, - LoanFirstDefaultedCycleNumber, -LP_GrossPrincipalLoss)
+```
+# Exploration of various variables
+##1. Analysis about "Influence of owning home on getting loan" 
+```{r Influence of owning home, warning=FALSE, message=FALSE}
+ggplot(aes(x =IsBorrowerHomeowner, fill = EmploymentStatus), data = subset(LoanWithoutNa, EmploymentStatus != "" ))+
+  geom_bar(position = "dodge") + 
+  xlab("Is Borrower a home owner?")+
+  theme_classic()
+```
+
+Number of loan borrowers with and without home are almost equal so it gives a idea that there is an equal chance to get loan for both types of people
+
+##2. Analysis about "Most frequent loan duration of loan"
+```{r Most frequent loan duration, message=FALSE, warning= FALSE}
+
+ggplot(aes(x =Term), data = LoanWithoutNa)+
+  geom_freqpoly(na.rm = TRUE, color = "orange")+
+  scale_x_continuous(limits = c(0,70), breaks = seq(0,70,5))+
+  xlab("Loan duration in months")+
+  theme_classic()
+```
+
+Term is length of loan expressed in months. It shows that most loans are taken for 36 months that is 3 years. Considering this customer mindset, It will be a good plan to make policy on loan with 36 months duration
+
+##3. Analysis about "Influence of Employment status duration on loan"
+```{r Influence of Employment status duration, message=FALSE, warning=FALSE}
+
+ggplot(aes(x = EmploymentStatusDuration, fill= EmploymentStatus), data = LoanWithoutNa)+
+  geom_histogram(color = "black")+
+  scale_x_continuous(limits = c(0,70), breaks = seq(0,70,5))+
+  xlab("Duration of Employment status")+
+  theme_classic()
+```
+
+Employment status duration shows the iteresting somewhat positively scewed distribution. It can be concluded that most people aiming for loan are recent job holder due to their small employment duration. Reason behind this maybe because as number of months of job duration increases, financial stability increases making less people apply for loan. In this Histogram, each bin is colored with type of employment the person has. It shows that chances of getting loan for self employed, part-time and retired has pretty low, Compared to them, full time employed has high possibility to get loan irrespective of number of months they worked at time of applying  
+
+##4. Analysis about "Influence of lower credit range on getting loan"
+```{r Influence of lower credit range, message=FALSE, warning=FALSE}
+
+ggplot(aes(x = CreditScoreRangeLower, fill= EmploymentStatus), data = LoanWithoutNa)+
+  geom_histogram(binwidth = 10) + 
+  scale_x_continuous(limits = c(400, 890),breaks = seq(400,890,50)) + 
+  xlab("Lower credit score range")+
+  theme_classic()
+```  
+
+it shows that people with minimum credit score of 650 - 680 stands highest chance of getting loan. Each bin is devided by colors with each color showing the count of type of employment status. Again number of people having employment status as "Employed"  and "Full time" are highest in number having desired range of credit score rating for loan. It proves fact that employment status as "Employed"  and "Full time" are helpful to secure loan
+
+##5. Analysis about "Influence of upper credit range on getting loan"
+```{r Influence of upper credit range, warning=FALSE, message=FALSE}
+
+ggplot(aes(x =CreditScoreRangeUpper, fill= EmploymentStatus), data = LoanWithoutNa)+
+  geom_histogram(color = "black") + 
+  scale_x_continuous(limits = c(500, 900), breaks = seq(500,900,25))+ 
+  xlab("Upper credit range")+
+  theme_classic()
+```
+
+Here it shows that people with maximum credit score of 675 - 725 stands highest chance of getting loan. Each bin is devided by colors with count of type of employment status. By observing distribution plot, it can be stated that number of people having employment status as "Employed"  and "Full time" are highest having eligible credit score rating for loan. It proves fact that employment status as "Employed"  and "Full time" are helpful to secure loan
+
+##6. Analysis about " Influence of Income ranege on credit range"
+```{r Influence of Income ranege on credit range, message=FALSE, warning=FALSE}
+
+p1<- ggplot(aes(x = IncomeRange, y = CreditScoreRangeLower ), data = LoanWithoutNa) +
+  geom_boxplot()+ 
+  xlab("Income range") + 
+  ylab("Lower range of credit score")+
+  theme(axis.text.x = element_text(angle = 90, size = 6))
+
+p2<-ggplot(aes(x = IncomeRange, y = CreditScoreRangeUpper ), data = LoanWithoutNa) +
+  geom_boxplot()+
+  xlab("Income range") + 
+  ylab("Upper range of credit score")+
+  theme(axis.text.x = element_text(angle = 90, size = 6))
+
+grid.arrange(p1,p2, ncol = 1)
+```
+
+Irrespective of how much income is, credit score range remained same for all income range. It would be a good point to consider while promoting loan scehme to various groups of people having different income range. This explorations clears the fact that, for marketing about loan, we should consider all income range groups.
+
+##7. Analysis about "Number of borrowers from different Occupation"
+```{r }
+Occupation_count <- LoanWithoutNa %>% 
+  group_by(Occupation) %>% 
+  filter(Occupation != "") %>%
+  count(Occupation) 
+
+Occupation_count <- as.data.frame(Occupation_count)
+
+# Removed observation "Other" as it will not give much insights about Occupation type
+Occupation_count <- Occupation_count[-c(36),]
+
+# Frequency of people having loan as per occupation
+ggplot(aes(x = Occupation, y= n), data = Occupation_count)+
+  geom_col(fill = "Orange") + 
+  xlab("Occupation type") +
+  ylab("Count for Occupation")+
+  theme(axis.text.x = element_text(angle =90, size = 5))
+```
+
+Graph informs about "from which profession" more people seek for loan. It shows that people from some perticular professions seeks more loan than other. It would be good to give a thought about specific interest rate for such professions.
+
+##8. Analysis about "Frequency of borrowers for different income range"
+```{r, Income range distribution of people taking loan, message=FALSE, warning=FALSE}
+
+ggplot(aes(x=IncomeRange, fill= EmploymentStatus) , data = LoanWithoutNa) +
+  geom_histogram(stat = "count") +
+  xlab("Income ranges")+
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+Above graph shows the frequency of borrowers for different income range. It shows that there is weak correlation between income range and number of people seeking loan as number of borrowers increase with increase in income range then after one point, there is decrease in number of borrowers with increase in income range. One more noticable fact is that, in general, number of people seeking loan having employment status "employed" and "full time" are larger in number than other employment status  across all income range
+
+##9. Analysis about "Reasons for loan borrowing"
+```{r Understanding cause for which people take loan frequently, message=FALSE, warning=FALSE}
+#9 Understanding cause for which people take loan frequently
+ggplot(aes(x =ListingCategory..numeric.), data = LoanWithoutNa)+
+  geom_histogram(stat = "count", color = "black",fill = "orange") +
+  scale_x_continuous(breaks = seq(0,20,1))+
+  xlab("Loan Borrower category")
+```
+
+Above graph shows that most people borrow loan for following reasons
+1. 1(Debt Consolidation)
+2. 2(Home Improvement)
+3. 3(Business)
+Here 0 means the reason is not provided.
+
+##10. Analysis about "Loan borrowing frequency as per state"
+```{r Frequency of people taking loan as per borrower state, message=FALSE, warning=FALSE}
+#10 Frequency of people taking loan as per borrower state
+ggplot(aes(x = BorrowerState, color = EmploymentStatus), data = subset(LoanWithoutNa, BorrowerState != ""))+
+  geom_histogram(stat = "count")+
+  xlab("State of a borrower")+
+  ylab("Count of borrowers")+
+  theme(axis.text.x = element_text(angle = 90, size = 5))
+```
+
+Above graph shows the number of borrowes from different state. CA has highest number of borrowers followed by states FL, NY, TX
+
+##11. Analysis about "Number of Borrowers for each quarter per year"
+```{r Number of Borrowers as per quarterly data, warning=FALSE, message=FALSE }
+
+#11 Number of Borrowers as per quarterly data 
+ggplot(aes(x = LoanOriginationQuarter,col = EmploymentStatus), data = LoanWithoutNa)+
+  geom_histogram(stat = "count")+
+  xlab("Quarterly Loan data")+
+  ylab("Count for number of borrowers")+
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+Above graph shows the number of borrowrs as per different quarters. If we observe trends, mostly number of borrowers are increasing per year. During each of this duration, highest number of borrowers are the one with employment status "employed" and "full time"
+
+##12. Analysis about " Distribution between Number of borrower owning or not owning home and states"
+```{r distribution between Number of borrower owning or not owning home and states, warning=FALSE, message=FALSE }
+
+#12 Distribution between Number of borrower owning or not owning home and states
+ggplot(aes(y =IsBorrowerHomeowner, x =BorrowerState), data = LoanWithoutNa)+
+  geom_jitter(stat = "Identity")+
+  xlab("State of a borrower")+
+  ylab("Whether Borrower owns a home?")+
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+Above plot shows the distribution of number of people owning or not owning home across each state. Surprisingly there is almost equal number of people owning and not owning home who are applying for loan at each state.
+
+##13. Analysis about " Distribution between Employment Status of borrowrs across states"
+```{r Distirbution between Employment Status of borrowrs across states, warning=FALSE, message=FALSE }
+
+#13 Distribution between Employment Status of borrowrs across states
+ggplot(aes(y =EmploymentStatus, x =BorrowerState), data = subset(LoanWithoutNa, BorrowerState != ""))+
+  geom_jitter(stat = "Identity")+
+  xlab("State of a borrower")+
+  ylab("Employment Status")+
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+Above plot shows that, across each state, large number of borrowers are either "Full-time" or "Employed". Some states are exception for that. These states are IA, ME and ND. It would be interesting to explore that why people with employment status either "Full-time" or "Employed" are not the major borrowers from that state.
+
+
+##14. Analysis about "Income range of borrowers across each state and employment status of borrowers across each state for given income range"
+```{r Income range of borrowers across each state and employment status of borrowers across each state for given income range, warning=FALSE, message=FALSE }
+
+#14 Income range of borrowers across each state and employment status of borrowers across each state for given income range
+ggplot(aes(y =IncomeRange, x =BorrowerState), data = subset(LoanWithoutNa, BorrowerState != "", ListingCategory..numeric. !=""))+
+  geom_tile(aes(fill= EmploymentStatus))+
+  xlab("State of a borrower")+
+  ylab("Income range")+
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+Above multivariate plot gives a lot of information about income range of borrowers across each state and employment status of borrowers across each state for given income range. This plot can be helpful to get guidelines about deciding policies on individual state level. For example, state "TN" and "WV" has large number of part time borrowers compare to other states
+
+
+# Final Plots and Summary
+```{r, message=FALSE, warning=FALSE}
+#Influence of owning home on getting loan
+ggplot(aes(x =IsBorrowerHomeowner, fill = EmploymentStatus), data = subset(LoanWithoutNa, EmploymentStatus != "" ))+
+  geom_bar(position = "dodge") + 
+  xlab("Is Borrower a home owner?")+
+  theme_classic()
+
+#Frequency of borrowers for different income range
+ggplot(aes(x=IncomeRange, fill= EmploymentStatus) , data = LoanWithoutNa) +
+  geom_histogram(stat = "count") +
+  xlab("Income ranges")+
+  theme(axis.text.x = element_text(angle = 90))
+
+#Reasons for loan borrowing
+ggplot(aes(x = LoanWithoutNa$ListingCategory..numeric.), data = LoanWithoutNa)+
+  geom_histogram(stat = "count", color = "black",fill = "orange") +
+  scale_x_continuous(breaks = seq(0,20,1))+
+  xlab("Loan Borrower category")
+```
+
+**Final Plots and Summary**
+
+Plot 1 <- Home is one of the common factor in everyone's life So it is very important to know how owning home has an influence on getting loan. First plot in final summary explains it. With the help of first graph, we can conclude that, people with or without owning home has equal chance of getting loan
+
+Plot 2 <- There are people with different income range. It is the universal social structure where everywhere there will be society divided into different income range. It is imortant to see how income range of people affects the loan borrowing frequency of borrower. It is observed that upto specific increase in income range, number of borrowers increases and then after certain value, number of borrowers decrease.
+
+Plot 3 <- It is very important to understand the main reasons for which people are buying loan. It helps to understand the needs of people and helps to develop starategies to expand business as per the reasons of buying loan. Main reasons for people to buy loan are 1. Debt consolidation 2. Home improvement 3. Business
+
+# Reflection
+It was very large data set with many variables to explore. It is important as well as difficult to understand which are critical variables in analysis and explore useful insights from them. 
+I started by understanding meaning of each variable at first and then I went through the data. Although there were many variables, some variables has a lots of missing data or zero values. So I explored some columns and did statistical computing in term of ratio of number of zero or NA values to the total number of values. It was useful exploration to reduce dimensions. It helped me to narrow down the exploration to specific variables.
+
+I explored some categorical variables like "IsBorrowerHomeowner", "EmploymentStatus" and numerical variables like "Term", "credit range" 
+
+Some of surprising findings were that, "Home owner and someone who doesn't own stands almost equal chance to get loan". "Most frequent reason to take loan is debt consolidation". "Income ranges may not have not much effect on number of people getting loan"
+
+Some of columns like "ProsperPaymentsLessThanOneMonthLate", "OnTimeProsperPayments" had many NA values. This missing information, if provided, would had helped to derive insights about nature of borrower in terms of debt repayment on time. With that data, policies about future interactions and interest rate about borrower could had been derived. 
+
+This missing data could have been used in multivariate analysis with variables like "Employment Status" and "Income range". With such analysis, general guidelines could have been derived about, how "Employment Status" and "Income range" can have effect on Ontime payment of loan by borrower.
